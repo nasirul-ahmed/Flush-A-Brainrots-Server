@@ -4,14 +4,17 @@ local Players = game:GetService("Players")
 local Workspace = game:GetService("Workspace")
 local Plots = Workspace.Plots
 
+-- Landscape mode for mobile
+game:GetService("StarterGui").ScreenOrientation = Enum.ScreenOrientation.LandscapeRight
+
 -- Assign Plots to players on join (randomly)
 game.Players.PlayerAdded:Connect(function(player)
 	print("Player joined: " .. player.Name)
 
 	local character = player.Character or player.CharacterAdded:Wait()
-	local HRP = character:WaitForChild("Humanoid")
+	local HRP = character:WaitForChild("HumanoidRootPart")
 
-	for _, plot in pairs(Plots:GetChildren()) do
+	for _, plot in Plots:GetChildren() do
 		if plot:GetAttribute("Taken") then
 			continue
 		end
@@ -19,7 +22,9 @@ game.Players.PlayerAdded:Connect(function(player)
 		plot:SetAttribute("Taken", true)
 		plot:SetAttribute("Owner", player.UserId)
 
-		HRP.CFrame = plot.CFrame + CFrame.new(0, 3, 0)
+        local baseCFrame = plot:IsA("Model") and plot.PrimaryPart and plot.PrimaryPart.CFrame or plot:GetPivot()
+
+		HRP.CFrame = baseCFrame * CFrame.new(0, 3, 0)
 
 		print("Assigned plot " .. plot.Name .. " to player " .. player.Name)
 
@@ -47,11 +52,12 @@ game.Players.PlayerRemoving:Connect(function(player)
 end)
 
 local brainrotsModule = require(script.Parent:WaitForChild("Modules"):WaitForChild("Brainrots"))
+local clouds = Workspace:WaitForChild("Clouds")
 
 -- Settings
 local SPAWN_INTERVAL = 10
 local SPAWN_COUNT = 4
-local SPAWN_THRESHOLD = 40
+local SPAWN_THRESHOLD = 20
 
 local templateFolder = Workspace:WaitForChild("Brainrots") -- your templates
 local mainTrack = Workspace:WaitForChild("MainTrack") -- your main track
@@ -70,7 +76,7 @@ spawn(function()
 	while true do
 		local count = #activeFolder:GetChildren()
 		if count < SPAWN_THRESHOLD then
-			brainrotsModule.spawnBrainrot(activeFolder, templateFolder, mainTrack, SPAWN_COUNT)
+			brainrotsModule.spawnBrainrot(activeFolder, templateFolder, clouds, SPAWN_COUNT, mainTrack)
 		end
 		task.wait(SPAWN_INTERVAL)
 	end
