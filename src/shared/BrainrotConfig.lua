@@ -1,87 +1,44 @@
--- ReplicatedStorage/BrainrotConfig.lua
--- Central config for all brainrot types
+-- Shared constants for all brainrot systems
+return {
+	SPAWN_THRESHOLD = 20,
+	SPAWN_INTERVAL = 10,
+	-- Input Keys
+	PICKUP_KEY = Enum.KeyCode.F,
+	THROW_KEY = Enum.KeyCode.Q,
 
-local BrainrotConfig = {
-    ["Avocadorilla"] = {
-        StrengthRequired = 0,
-        FlushTime = 15, -- seconds
-        MoneyPerSecond = 10,
-        StrengthPerSecond = 5,
-        Rarity = "Basic",
-    },
+	-- Carrying Configuration
+	ARM_RAISE_DEGREES = 110,
+	HAND_HEIGHT_R6 = 2.0,
+	HAND_HEIGHT_R15 = 5.0,
+	CARRY_FORWARD_OFFSET = -2.5,
 
-    ["Bombardiro Crocodilo"] = {
-        StrengthRequired = 100,
-        FlushTime = 18,
-        MoneyPerSecond = 20,
-        StrengthPerSecond = 10,
-        Rarity = "Basic",
-    },
+	-- Throwing Configuration
+	MAX_THROW_POWER = 100,
+	MIN_THROW_POWER = 20,
+	CHARGE_TIME = 3,
+	THROW_ANGLE = 30,
 
-    ["Brr Brr Patapim"] = {
-        StrengthRequired = 250,
-        FlushTime = 20,
-        MoneyPerSecond = 35,
-        StrengthPerSecond = 15,
-        Rarity = "Basic",
-    },
+	-- Trajectory Visualization
+	TRAJECTORY_TIMESTEP = 0.15,
+	TRAJECTORY_MAX_TIME = 5,
+	TRAJECTORY_UPDATE_RATE = 0.1,
 
-    ["Cappuccino Assassino"] = {
-        StrengthRequired = 500,
-        FlushTime = 25,
-        MoneyPerSecond = 50,
-        StrengthPerSecond = 25,
-        Rarity = "Basic",
-    },
+	-- Landing Configuration
+	GROUND_LEVEL = -0.6,
+	LANDING_STILL_TIME = 1.0,
+	LANDING_MOVEMENT_THRESHOLD = 0.1,
 
-    ["Chicleteira Bicicleteira"] = {
-        StrengthRequired = 1000,
-        FlushTime = 30,
-        MoneyPerSecond = 75,
-        StrengthPerSecond = 40,
-        Rarity = "Basic",
-    },
+	-- Wormhole Configuration
+	WORMHOLE_ANIMATION_DURATION = 5,
+	WORMHOLE_FADE_DURATION = 1.5,
+	WORMHOLE_BASE_COLOR = Color3.new(0, 0.8, 1),
 
-    ["Chimpanzini Bananini"] = {
-        StrengthRequired = 1500,
-        FlushTime = 35,
-        MoneyPerSecond = 100,
-        StrengthPerSecond = 50,
-        Rarity = "Basic",
-    },
+	-- Remote Event Names
+	REMOTE_FOLDER_NAME = "BrainrotEvents",
+	THROW_START_EVENT = "ThrowStart",
+	THROW_RELEASE_EVENT = "ThrowRelease",
+	TRAJECTORY_UPDATE_EVENT = "TrajectoryUpdate",
 
-    ["Chimpanzini Spiderini"] = {
-        StrengthRequired = 2000,
-        FlushTime = 40,
-        MoneyPerSecond = 150,
-        StrengthPerSecond = 75,
-        Rarity = "Basic",
-    },
-
-    ["Cocofanto Elefanto"] = {
-        StrengthRequired = 3000,
-        FlushTime = 45,
-        MoneyPerSecond = 200,
-        StrengthPerSecond = 100,
-        Rarity = "Basic",
-    },
-
-    -- Example Golden brainrots
-    ["Golden Avocadorilla"] = {
-        StrengthRequired = 5000,
-        FlushTime = 50,
-        MoneyPerSecond = 400,
-        StrengthPerSecond = 200,
-        Rarity = "Golden",
-    },
-
-    ["Golden Bombardiro"] = {
-        StrengthRequired = 7500,
-        FlushTime = 60,
-        MoneyPerSecond = 600,
-        StrengthPerSecond = 300,
-        Rarity = "Golden",
-    },
+	-- Workspace Names
+	ACTIVE_BRAINROTS_FOLDER = "ActiveBrainrots",
 }
-
-return BrainrotConfig
